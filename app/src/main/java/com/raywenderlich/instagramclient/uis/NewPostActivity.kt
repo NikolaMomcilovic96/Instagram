@@ -1,13 +1,15 @@
-package com.raywenderlich.instagramclient
+package com.raywenderlich.instagramclient.uis
 
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
+import com.raywenderlich.instagramclient.R
 import com.raywenderlich.instagramclient.databinding.ActivityNewPostBinding
+import com.raywenderlich.instagramclient.model.Post
+import com.raywenderlich.instagramclient.posts
 
 class NewPostActivity : AppCompatActivity() {
 
@@ -34,7 +36,7 @@ class NewPostActivity : AppCompatActivity() {
                 "guts" -> post = R.drawable.guts
             }
             if (imageText.isNotEmpty()) {
-                val newPost = Post(username, post, desc)
+                val newPost = Post(0, username, post, desc)
                 posts.add(newPost)
                 startActivity(Intent(this, MainActivity::class.java))
             } else {

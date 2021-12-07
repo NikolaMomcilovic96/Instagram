@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InstagramClient">
         <activity
-            android:name=".RegistrationActivity"
+            android:name=".uis.RegistrationActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".uis.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,15 +22,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ProfileActivity"
+            android:name=".uis.ProfileActivity"
             android:label="Your Profile"
             android:theme="@style/Theme.InstagramClientProfile"
             android:exported="false" />
         <activity
-            android:name=".NewPostActivity"
+            android:name=".uis.NewPostActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".uis.MainActivity"
             android:exported="false" />
     </application>
 

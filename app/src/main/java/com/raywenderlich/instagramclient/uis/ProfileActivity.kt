@@ -1,4 +1,4 @@
-package com.raywenderlich.instagramclient
+package com.raywenderlich.instagramclient.uis
 
 import android.content.Context
 import android.content.Intent
@@ -8,7 +8,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import com.raywenderlich.instagramclient.R
 import com.raywenderlich.instagramclient.databinding.ActivityProfileBinding
+import com.raywenderlich.instagramclient.users
 
 class ProfileActivity : AppCompatActivity() {
 

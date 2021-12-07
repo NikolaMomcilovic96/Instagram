@@ -1,4 +1,4 @@
-package com.raywenderlich.instagramclient
+package com.raywenderlich.instagramclient.uis
 
 import android.content.Intent
 import android.content.SharedPreferences
@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.raywenderlich.instagramclient.databinding.ActivityRegistrationBinding
+import com.raywenderlich.instagramclient.model.User
+import com.raywenderlich.instagramclient.users
 
 class RegistrationActivity : AppCompatActivity() {
 
@@ -28,11 +30,13 @@ class RegistrationActivity : AppCompatActivity() {
                 Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show()
             } else {
                 if (password == confirmation) {
-                    val user = User(username, password, 0)
+                    val user = User(0, username, password, 0)
                     users.add(user)
-                    Toast.makeText(this,
+                    Toast.makeText(
+                        this,
                         "Account created successfully. Please log in.",
-                        Toast.LENGTH_LONG).show()
+                        Toast.LENGTH_LONG
+                    ).show()
                     startActivity(Intent(this, LoginActivity::class.java))
                 } else {
                     Toast.makeText(this, "Passwords don't match", Toast.LENGTH_SHORT).show()
