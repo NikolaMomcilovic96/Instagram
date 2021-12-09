@@ -5,11 +5,14 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.raywenderlich.instagramclient.R
 import com.raywenderlich.instagramclient.databinding.ActivityNewPostBinding
+import com.raywenderlich.instagramclient.db.PostDatabase
 import com.raywenderlich.instagramclient.model.Post
-import com.raywenderlich.instagramclient.posts
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class NewPostActivity : AppCompatActivity() {
 
@@ -24,24 +27,34 @@ class NewPostActivity : AppCompatActivity() {
         setContentView(view)
 
         binding.createNewPostButton.setOnClickListener {
-            sharedPreferences = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
-            val username = sharedPreferences.getString("LOGGED_USER", "").toString()
-            val imageText = binding.postImage.text.toString()
-            val desc = binding.postDescription.text.toString()
-            var post = 0
-            when (imageText) {
-                "micko" -> post = R.drawable.micko
-                "bolto" -> post = R.drawable.bolto
-                "coolpost" -> post = R.drawable.coolpost
-                "guts" -> post = R.drawable.guts
+            insertPost()
+        }
+    }
+
+    private fun insertPost() {
+        sharedPreferences = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
+        val username = sharedPreferences.getString("LOGGED_USER", "").toString()
+        val imageText = binding.postImage.text.toString()
+        val desc = binding.postDescription.text.toString()
+        var image = 0
+        when (imageText) {
+            "micko" -> image = R.drawable.micko
+            "bolto" -> image = R.drawable.bolto
+            "coolpost" -> image = R.drawable.coolpost
+            "guts" -> image = R.drawable.guts
+        }
+        if (imageText.isNotEmpty()) {
+
+            val dbInstance = PostDatabase.getPostDatabase(this)
+
+            GlobalScope.launch {
+                val newPost = Post(0, username, image, desc, 0)
+                dbInstance?.postDao()?.insertPost(newPost)
             }
-            if (imageText.isNotEmpty()) {
-                val newPost = Post(0, username, post, desc)
-                posts.add(newPost)
-                startActivity(Intent(this, MainActivity::class.java))
-            } else {
-                Toast.makeText(this, "Photo is required", Toast.LENGTH_SHORT).show()
-            }
+            Toast.makeText(this, "Post created successfully!", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, MainActivity::class.java))
+        } else {
+            Toast.makeText(this, "Photo is required", Toast.LENGTH_SHORT).show()
         }
     }
 }

@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.raywenderlich.instagramclient.Post
 import com.raywenderlich.instagramclient.databinding.ListItemViewBinding
+import com.raywenderlich.instagramclient.model.Post
 import com.raywenderlich.instagramclient.users
 import kotlin.collections.ArrayList
 

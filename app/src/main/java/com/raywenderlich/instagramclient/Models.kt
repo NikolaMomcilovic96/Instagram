@@ -6,10 +6,10 @@ import com.raywenderlich.instagramclient.model.User
 val posts: ArrayList<Post> = arrayListOf(
     Post(0, "cikanikola96", R.drawable.bolto, "Bolto the Bulldog", 120),
     Post(1, "jelenajovancevic96", R.drawable.micko, "Micko the Maltese", 250),
-    Post(2, "stankela33", R.drawable.coolpost, "Mnogo kul sliga"),
+    Post(2, "stankela33", R.drawable.coolpost, "Mnogo kul sliga",0),
     Post(3, "ivan", R.drawable.asdsadsad, "", 1),
-    Post(4, "natasasevo", R.drawable.op_1019__001av2, "One piece"),
-    Post(5, "aleksandar.fineti", R.drawable.guts, "Guts")
+    Post(4, "natasasevo", R.drawable.op_1019__001av2, "One piece",0),
+    Post(5, "aleksandar.fineti", R.drawable.guts, "Guts",0)
 )
 
 val users: ArrayList<User> = arrayListOf(

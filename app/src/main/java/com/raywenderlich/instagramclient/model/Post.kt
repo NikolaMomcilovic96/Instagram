@@ -9,10 +9,6 @@ data class Post(
     var id: Int,
     var username: String,
     var post: Int,
-    var description: String = "",
-    var likes: Int = 0
-) {
-    fun likePost() {
-        
-    }
-}
+    var description: String,
+    var likes: Int
+)
