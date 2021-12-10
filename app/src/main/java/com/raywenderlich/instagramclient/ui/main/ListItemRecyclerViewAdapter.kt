@@ -5,13 +5,17 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.raywenderlich.instagramclient.databinding.ListItemViewBinding
+import com.raywenderlich.instagramclient.db.PostDatabase
 import com.raywenderlich.instagramclient.model.Post
 import com.raywenderlich.instagramclient.users
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kotlin.collections.ArrayList
 
-
-class ListItemRecyclerViewAdapter(private val posts: ArrayList<Post>) :
+class ListItemRecyclerViewAdapter() :
     RecyclerView.Adapter<ListItemViewHolder>() {
+
+    private var postList = emptyList<Post>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListItemViewHolder {
         val binding =
@@ -20,7 +24,8 @@ class ListItemRecyclerViewAdapter(private val posts: ArrayList<Post>) :
     }
 
     override fun onBindViewHolder(holder: ListItemViewHolder, position: Int) {
-        var likesCount = posts[position].likes
+        val currentItem = postList[position]
+        var likesCount = currentItem.likes
         var liked = false
         val likesText = "$likesCount likes"
         var profilePicture = 0
@@ -29,7 +34,7 @@ class ListItemRecyclerViewAdapter(private val posts: ArrayList<Post>) :
             return holder.binding.descriptionTextView.text == ""
         }
 
-        val username = posts[position].username
+        val username = currentItem.username
         for (user in users) {
             if (user.username == username) {
                 profilePicture = user.profilePicture
@@ -37,12 +42,12 @@ class ListItemRecyclerViewAdapter(private val posts: ArrayList<Post>) :
         }
 
         holder.binding.profileImageView.setImageResource(profilePicture)
-        holder.binding.usernameTextView.text = posts[position].username
-        holder.binding.postImageView.setImageResource(posts[position].post)
+        holder.binding.usernameTextView.text = currentItem.username
+        holder.binding.postImageView.setImageResource(currentItem.post)
         holder.binding.likesTextView.text = likesText
         if (checkDesc()) {
-            holder.binding.bottomUsernameTextView.text = posts[position].username
-            holder.binding.descriptionTextView.text = posts[position].description
+            holder.binding.bottomUsernameTextView.text = currentItem.username
+            holder.binding.descriptionTextView.text = currentItem.description
         } else {
             holder.binding.bottomUsernameTextView.isVisible = false
             holder.binding.descriptionTextView.isVisible = false
@@ -58,10 +63,14 @@ class ListItemRecyclerViewAdapter(private val posts: ArrayList<Post>) :
                 holder.binding.likesTextView.text = "$likesCount likes"
             }
         }
-
     }
 
     override fun getItemCount(): Int {
-        return posts.size
+        return postList.size
+    }
+
+    fun setData(post: List<Post>){
+        this.postList = post
+        notifyDataSetChanged()
     }
 }

@@ -111,14 +111,14 @@
                 tools:text="Opis slike" />
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/deleteButton"
                 android:layout_width="44dp"
                 android:layout_height="46dp"
                 android:layout_margin="10dp"
                 android:background="@android:color/transparent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@android:drawable/ic_menu_edit"
+                app:srcCompat="@android:drawable/ic_menu_delete"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

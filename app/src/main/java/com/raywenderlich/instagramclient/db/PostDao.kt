@@ -11,6 +11,9 @@ interface PostDao {
     @Query("SELECT * FROM Post")
     fun loadAll(): LiveData<List<Post>>
 
+    @Query("SELECT * FROM Post WHERE id = :postId")
+    fun loadPost(postId: Long): Post
+
     @Insert(onConflict = IGNORE)
     fun insertPost(post: Post): Long
 
