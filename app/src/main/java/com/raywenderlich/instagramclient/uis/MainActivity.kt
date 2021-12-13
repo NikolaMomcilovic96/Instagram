@@ -3,11 +3,9 @@ package com.raywenderlich.instagramclient.uis
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.core.view.WindowCompat
 import com.raywenderlich.instagramclient.R
 import com.raywenderlich.instagramclient.databinding.MainActivityBinding
-import com.raywenderlich.instagramclient.posts
 import com.raywenderlich.instagramclient.ui.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
@@ -27,10 +25,6 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, MainFragment.newInstance())
                 .commitNow()
-        }
-
-        for (post in posts){
-            Log.d("POST",post.toString())
         }
 
         binding.newPostButton.setOnClickListener {

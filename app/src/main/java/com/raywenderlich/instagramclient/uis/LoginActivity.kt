@@ -7,7 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.raywenderlich.instagramclient.databinding.ActivityLoginBinding
-import com.raywenderlich.instagramclient.users
+import com.raywenderlich.instagramclient.model.User
+import com.raywenderlich.instagramclient.viewmodel.UserViewModel
 
 class LoginActivity : AppCompatActivity() {
 
@@ -29,14 +30,12 @@ class LoginActivity : AppCompatActivity() {
                 val username = binding.usernameEditText.text.toString()
                 val password = binding.passwordEditText.text.toString()
 
-                for (user in users){
-                    if (username.isEmpty() || password.isEmpty()) {
-                        Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show()
-                    } else if (username==user.username){
-                        sharedPreferences.edit().putString("LOGGED_USER", username).apply()
-                        finish()
-                        startActivity(Intent(this, MainActivity::class.java))
-                    }
+                if (username.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show()
+                } else {
+                    sharedPreferences.edit().putString("LOGGED_USER", username).apply()
+                    finish()
+                    startActivity(Intent(this, MainActivity::class.java))
                 }
             }
 

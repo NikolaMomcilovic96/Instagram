@@ -4,18 +4,18 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.raywenderlich.instagramclient.R
 import com.raywenderlich.instagramclient.databinding.ListItemViewBinding
-import com.raywenderlich.instagramclient.db.PostDatabase
+import com.raywenderlich.instagramclient.db.UserDao
 import com.raywenderlich.instagramclient.model.Post
-import com.raywenderlich.instagramclient.users
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlin.collections.ArrayList
+import com.raywenderlich.instagramclient.viewmodel.UserViewModel
 
-class ListItemRecyclerViewAdapter() :
+class ListItemRecyclerViewAdapter :
     RecyclerView.Adapter<ListItemViewHolder>() {
 
     private var postList = emptyList<Post>()
+    private lateinit var userDao: UserDao
+    private lateinit var userViewModel: UserViewModel
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListItemViewHolder {
         val binding =
@@ -24,24 +24,17 @@ class ListItemRecyclerViewAdapter() :
     }
 
     override fun onBindViewHolder(holder: ListItemViewHolder, position: Int) {
+
         val currentItem = postList[position]
         var likesCount = currentItem.likes
         var liked = false
         val likesText = "$likesCount likes"
-        var profilePicture = 0
 
         fun checkDesc(): Boolean {
             return holder.binding.descriptionTextView.text == ""
         }
 
-        val username = currentItem.username
-        for (user in users) {
-            if (user.username == username) {
-                profilePicture = user.profilePicture
-            }
-        }
-
-        holder.binding.profileImageView.setImageResource(profilePicture)
+        holder.binding.profileImageView.setImageResource(R.drawable.doncic)
         holder.binding.usernameTextView.text = currentItem.username
         holder.binding.postImageView.setImageResource(currentItem.post)
         holder.binding.likesTextView.text = likesText
@@ -69,7 +62,7 @@ class ListItemRecyclerViewAdapter() :
         return postList.size
     }
 
-    fun setData(post: List<Post>){
+    fun setData(post: List<Post>) {
         this.postList = post
         notifyDataSetChanged()
     }

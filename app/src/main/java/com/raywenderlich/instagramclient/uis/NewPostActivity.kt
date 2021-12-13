@@ -29,7 +29,7 @@ class NewPostActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        postViewModel = ViewModelProvider(this).get(PostViewModel::class.java)
+        postViewModel = ViewModelProvider(this)[PostViewModel::class.java]
 
         binding.createNewPostButton.setOnClickListener {
             insertPost()

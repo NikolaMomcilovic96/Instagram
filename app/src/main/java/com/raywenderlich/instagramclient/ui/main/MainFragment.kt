@@ -8,11 +8,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.raywenderlich.instagramclient.databinding.MainFragmentBinding
 import com.raywenderlich.instagramclient.viewmodel.PostViewModel
+import com.raywenderlich.instagramclient.viewmodel.UserViewModel
 
 class MainFragment : Fragment() {
 
     private lateinit var binding: MainFragmentBinding
     private lateinit var postViewModel: PostViewModel
+    private lateinit var userViewModel: UserViewModel
 
     companion object {
         fun newInstance() = MainFragment()
@@ -32,6 +34,8 @@ class MainFragment : Fragment() {
         postViewModel.readAllData.observe(viewLifecycleOwner, { post ->
             adapter.setData(post)
         })
+
+        userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
 
         return binding.root
     }

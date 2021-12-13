@@ -10,17 +10,17 @@ import com.raywenderlich.instagramclient.repository.PostRepo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class PostViewModel(application: Application):AndroidViewModel(application) {
-    val readAllData:LiveData<List<Post>>
+class PostViewModel(application: Application) : AndroidViewModel(application) {
+    val readAllData: LiveData<List<Post>>
     private val repository: PostRepo
 
     init {
         val postDao = PostDatabase.getPostDatabase(application)!!.postDao()
         repository = PostRepo(postDao)
-        readAllData=repository.readAllData
+        readAllData = repository.readAllData
     }
 
-    fun addPost(post: Post){
+    fun addPost(post: Post) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addPost(post)
         }
