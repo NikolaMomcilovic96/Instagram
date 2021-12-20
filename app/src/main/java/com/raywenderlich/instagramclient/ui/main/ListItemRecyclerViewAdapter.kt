@@ -14,8 +14,6 @@ class ListItemRecyclerViewAdapter :
     RecyclerView.Adapter<ListItemViewHolder>() {
 
     private var postList = emptyList<Post>()
-    private lateinit var userDao: UserDao
-    private lateinit var userViewModel: UserViewModel
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListItemViewHolder {
         val binding =

@@ -18,4 +18,8 @@ class UserRepo(private val userDao: UserDao) {
     fun loadUser(username: String):User{
         return userDao.loadUser(username)
     }
+
+    fun updateUser(user: User){
+        userDao.updateUser(user)
+    }
 }

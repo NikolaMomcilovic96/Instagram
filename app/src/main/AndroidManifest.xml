@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.raywenderlich.instagramclient">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +10,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.InstagramClient">
+
+        <provider
+            android:authorities="com.example.androidcamera.fileprovider"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/providerfile"/>
+        </provider>
+
+        <activity
+            android:name=".uis.ChangeProfilePictureActivity"
+            android:exported="false" />
         <activity
             android:name=".uis.RegistrationActivity"
             android:exported="false" />
@@ -23,9 +38,9 @@
         </activity>
         <activity
             android:name=".uis.ProfileActivity"
+            android:exported="false"
             android:label="Your Profile"
-            android:theme="@style/Theme.InstagramClientProfile"
-            android:exported="false" />
+            android:theme="@style/Theme.InstagramClientProfile" />
         <activity
             android:name=".uis.NewPostActivity"
             android:exported="false" />
@@ -33,5 +48,4 @@
             android:name=".uis.MainActivity"
             android:exported="false" />
     </application>
-
 </manifest>

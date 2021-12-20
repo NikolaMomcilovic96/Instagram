@@ -1,5 +1,6 @@
 package com.raywenderlich.instagramclient.model
 
+import android.graphics.Bitmap
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -8,7 +9,7 @@ data class Post(
     @PrimaryKey(autoGenerate = true)
     var id: Int,
     var username: String,
-    var post: Int,
+    var post: Bitmap,
     var description: String,
     var likes: Int
 )

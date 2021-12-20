@@ -39,6 +39,10 @@ class ProfileActivity : AppCompatActivity() {
         binding.postsTextView.text = user.posts.toString()
         binding.followersTextView.text = user.followers.toString()
         binding.followingTextView.text = user.following.toString()
+
+        binding.profilePictureImageView.setOnClickListener {
+            startActivity(Intent(this, ChangeProfilePictureActivity::class.java))
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
